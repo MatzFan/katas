@@ -3,3 +3,5 @@ def fizzbuzz(n)
   n % 5 == 0 ? b = "Buzz" : b = ""
   (f + b == "") ? n : f + b
 end
+
+(1..30).each { |n| puts fizzbuzz(n) }

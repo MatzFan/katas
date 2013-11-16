@@ -1,8 +1,6 @@
 def number_to_roman_numeral(n)
-  # first create array of symols representing digits
-  # numbers = 1000, 500, 100, 50, 10, 5, 1
-  # numerals = :M, :D, :C, :L, :X, :V, :I
-  numerals = :I, :V, :X, :L, :C, :D, :M
+  numerals = :M, :D, :C, :L, :X, :V, :I
+  numbers = 1, 5, 10, 50, 100, 500, 1000
   # num_map = Hash[numbers.zip(numerals)]
   numeral_count = [0,0,0,0,0,0,0]
   # calculate n /5 and set I's
@@ -17,9 +15,14 @@ def number_to_roman_numeral(n)
   end
   # change 'M' to correctly relect 1,000's for big numbers
   numeral_count[6] = n / 1000 if numeral_count.size == 7
-  p numeral_count
   # loop to build string, converting '1-less' numbers as appropriate
-
+  string = ""
+  # reverse again to get in correct order to build string
+  numeral_count.reverse.each_with_index do |n,i|
+    # first determine if the string is prepended with next numeral up
+    n == 4 ? string += "#{numerals[i]}#{numerals[i-1]}" : string += "#{numerals[i].to_s * n}"
+  end
+  string
 end
 
-number_to_roman_numeral(9448)
+puts number_to_roman_numeral(448)

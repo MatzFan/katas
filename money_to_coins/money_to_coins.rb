@@ -12,5 +12,3 @@ def money_to_coins(amount)
   change.reverse!.each_with_index { |n,i| string << "#{n}x#{syms[i]} " if n != 0 }
   string.strip
 end
-
-# puts money_to_coins("£1.79")

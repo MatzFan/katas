@@ -14,7 +14,7 @@ def number_to_roman_numeral(n)
   end
   answer_arr = []
   numeral_count.each_with_index do |c,i|
-    if c == 4
+    if i < 6 && c == 4 # ignore for '1,000's
       if numeral_count[i+1] == 0
         answer_arr << numerals[i+1] << numerals[i]
       else

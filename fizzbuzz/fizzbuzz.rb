@@ -4,4 +4,5 @@ def fizzbuzz(n)
   (f + b == "") ? n : f + b
 end
 
-(1..30).each { |n| puts fizzbuzz(n) }
+
+(1..30).each { |n| fb = fizzbuzz(n); `say #{fb}` }

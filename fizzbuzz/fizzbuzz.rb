@@ -5,4 +5,4 @@ def fizzbuzz(n)
 end
 
 
-(1..30).each { |n| fb = fizzbuzz(n); `say #{fb}` }
+(1..30).each { |n| `say #{fizzbuzz(n)}` }

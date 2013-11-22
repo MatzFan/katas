@@ -53,4 +53,4 @@ class Numbers
 
 end # of class
 
-# p Numbers.new.number_to_words(1_000_100)
+p Numbers.new.number_to_words(1_000_100)

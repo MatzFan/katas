@@ -2,14 +2,16 @@ require_relative './number_to_words'
 
 describe 'numbers to words' do
 
+  let(:num) {Numbers.new}
+
   context "for a single digit integer" do
     it "converts one digit strings into a word representation" do
       expected = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-      (1..9).map { |i| number_to_words(i) }.should == expected
+      (1..9).map { |i| num.number_to_words(i) }.should == expected
     end
 
     it "handles zero appropriately" do
-      expect(number_to_words(0)).to eq ""
+      expect(num.number_to_words(0)).to eq ""
     end
   end
 
@@ -18,7 +20,7 @@ describe 'numbers to words' do
       expected = ["twenty four",
                   "forty five",
                   "seventy eight"]
-      [24, 45, 78].map { |i| number_to_words(i) }.should == expected
+      [24, 45, 78].map { |i| num.number_to_words(i) }.should == expected
     end
 
     it "handles zeros appropriately" do
@@ -27,7 +29,7 @@ describe 'numbers to words' do
 
     it "handles teens appropriately" do
       expected = ["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"]
-      (10..19).map { |i| number_to_words(i) }.should == expected
+      (10..19).map { |i| num.number_to_words(i) }.should == expected
     end
   end
 
@@ -37,14 +39,14 @@ describe 'numbers to words' do
                   "four hundred and fifty six",
                   "seven hundred and eighty nine",
                   "one hundred and twelve",]
-      [123, 456, 789, 112].map { |i| number_to_words(i) }.should == expected
+      [123, 456, 789, 112].map { |i| num.number_to_words(i) }.should == expected
     end
 
     it "handles zeros appropriately" do
       expected = ["one hundred and three",
                   "seven hundred and eighty",
                   "one hundred"]
-      [103, 780, 100].map { |i| number_to_words(i) }.should == expected
+      [103, 780, 100].map { |i| num.number_to_words(i) }.should == expected
     end
   end
 
@@ -58,7 +60,7 @@ describe 'numbers to words' do
       "one million",
       "one million one hundred"]
       test_numbers = [417154,417155,908070,999999,1000000,1000100]
-      test_numbers.map { |i| number_to_words(i) }.should == expected
+      test_numbers.map { |i| num.number_to_words(i) }.should == expected
     end
   end
 
@@ -67,8 +69,8 @@ describe 'numbers to words' do
     expected = IO.read(fixture_path).split("\n")
 
     (1..10000).each do |n|
-      expect(number_to_words(n)).to eq expected[n-1]
+      expect(num.number_to_words(n)).to eq expected[n-1]
     end
-  end 
-  
+  end
+
 end

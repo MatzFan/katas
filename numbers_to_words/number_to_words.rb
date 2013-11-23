@@ -12,37 +12,44 @@ class Numbers
     six_zeros, remainder = number.divmod(1_000_000)
     three_zeros, no_zeros = remainder.divmod(1_000)
 
-    bil_string = three_digitify(six_zeros)
-    mil_string = three_digitify(three_zeros)
-    thou_string = three_digitify(no_zeros)
+    bil_string = three_digitify(six_zeros, false)
+    mil_string = three_digitify(three_zeros, false)
 
-    answer_string = string_builder([thou_string, mil_string, bil_string]).reverse!
-    answer_string.join('').gsub(/\s\s/, ' ').strip
+    check_and = (bil_string + mil_string).length < 3 ? false : true
+
+    thou_string = three_digitify(no_zeros, check_and)
+
+    answer_arr = string_builder([thou_string, mil_string, bil_string]).reverse!
+    # aa += ' and ' if _s.length > 2 && !_s.include?('hundred')
+    answer = answer_arr.join('').gsub(/\s\s/, ' ').strip
+    answer = answer.gsub(/and and/, 'and') # removes duplicate ands!
   end
 
   def string_builder(array)
     _s, ooo_s, ooo_ooo_s = array
     if ooo_ooo_s.length > 2
-      a = ' million '
-      a += ' and ' if ooo_s.length > 2 && !ooo_s.include?('hundred')
+      million = ' million '
     end
-    array.insert(2, a)
+    array.insert(2, million)
     if ooo_s.length > 2
-      aa = ' thousand '
-      aa += ' and ' if _s.length > 2 && !_s.include?('hundred')
+      thousand = ' thousand '
     end
-    array.insert(1, aa)
+    array.insert(1, thousand)
   end
 
-  def three_digitify(number) # wordifies a 3 digit number
+  def three_digitify(number, check_and) # wordifies a 3 digit number
     hundreds, remainder = number.divmod(100)
     two_digit_string = two_digitify(remainder)
     string = ''
     if hundreds > 0
       string = UNITS_MAP[hundreds] + " hundred"
       string += ' and ' if two_digit_string != ' '
+    elsif
+      # check if final 'and' is needed
+      (and_ = 'and ' if check_and)
     end
-    string += two_digitify(remainder)
+    and_ = ((check_and && two_digit_string.length > 2) ? 'and ' : '')
+    string += and_ + two_digitify(remainder)
   end
 
   def two_digitify(number) # wordifies a 2 digit number
@@ -53,4 +60,4 @@ class Numbers
 
 end # of class
 
-p Numbers.new.number_to_words(1_000_100)
+p Numbers.new.number_to_words(417154)

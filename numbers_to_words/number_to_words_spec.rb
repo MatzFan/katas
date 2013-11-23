@@ -24,7 +24,7 @@ describe 'numbers to words' do
     end
 
     it "handles zeros appropriately" do
-      wordifier.wordify(20).should == "twenty"
+      num.number_to_words(20).should == "twenty"
     end
 
     it "handles teens appropriately" do
